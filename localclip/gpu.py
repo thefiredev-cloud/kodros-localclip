@@ -36,7 +36,10 @@ def gpu_reserved_running() -> bool:
 
 
 def _query(args: list[str]) -> list[list[str]]:
-    r = subprocess.run(["nvidia-smi", *args, "--format=csv,noheader,nounits"], capture_output=True, text=True, timeout=10)
+    try:
+        r = subprocess.run(["nvidia-smi", *args, "--format=csv,noheader,nounits"], capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return []  # no nvidia-smi on PATH, or it hung: report "no GPU" instead of crashing
     if r.returncode != 0:
         return []
     return [[c.strip() for c in line.split(",")] for line in r.stdout.strip().splitlines() if line.strip()]
