@@ -72,7 +72,7 @@ Sources the browser cannot play (not H.264/AAC) get a 540p proxy for preview onl
 
 ```text
 localclip/     pipeline, transcribe, select, crop, captions, render, server, web/
-tests/         57 tests and media helpers
+tests/         test suite and media helpers
 scripts/       synthetic test video builder
 fixtures/      public-domain portrait and narration text
 docs/architecture.svg
