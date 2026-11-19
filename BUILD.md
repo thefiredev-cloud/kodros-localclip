@@ -55,6 +55,7 @@ Default output: `~/.local/share/localclip/runs/<input>-<utc>/` (mode 0700). Data
 | `LOCALCLIP_PARAKEET_TOKEN_FILE` | `~/.config/localclip/stt-token` | Bearer token for that service |
 | `LOCALCLIP_HOME` | `~/.local/share/localclip` | Projects, cache, runs |
 | `LOCALCLIP_MAX_UPLOAD_GB` | `20` | Web upload cap |
+| `LOCALCLIP_GPU_BLOCK` | empty | Comma-separated process-name fragments. While one is running, LocalClip uses CPU Whisper and libx264. Empty blocks nothing. Logs say "a GPU-reserved process is running" |
 
 ## Pipeline
 
@@ -71,7 +72,7 @@ Sources the browser cannot play (not H.264/AAC) get a 540p proxy for preview onl
 
 ```text
 localclip/     pipeline, transcribe, select, crop, captions, render, server, web/
-tests/         54 tests and media helpers
+tests/         57 tests and media helpers
 scripts/       synthetic test video builder
 fixtures/      public-domain portrait and narration text
 docs/architecture.svg

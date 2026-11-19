@@ -19,7 +19,7 @@ from pathlib import Path
 from . import __version__
 from .captions import CaptionStyle, build_ass, caption_events, relative_words
 from .crop import CROP_MODES, out_size, plan_crop
-from .gpu import GPUMonitor, geforce_now_running
+from .gpu import GPUMonitor, gpu_reserved_running
 from .llm import DEFAULT_MODEL, make_cluster_llm
 from .render import has_audio, measure_loudness, probe, render_clip, video_size
 from .select import Selection, select_clips
@@ -97,7 +97,7 @@ class Analysis:
     selection: Selection
     specs: list[ClipSpec]
     stages: dict[str, float]
-    geforce_now_gate: bool
+    gpu_reserved_gate: bool
     gpu: dict
     options: Options
 
@@ -167,10 +167,10 @@ def analyze(src: str, opts: Options, work: Path, log=print) -> Analysis:
     size = video_size(info)
     duration = float(info["format"]["duration"])
     work = _private_dir(work)
-    gfn = geforce_now_running()
-    gpu_ok = not gfn
-    if gfn:
-        log("GeForce NOW is running: GPU work disabled (CPU whisper, libx264)")
+    reserved = gpu_reserved_running()
+    gpu_ok = not reserved
+    if reserved:
+        log("a GPU-reserved process is running: GPU work disabled (CPU whisper, libx264)")
     stages: dict[str, float] = {}
     with GPUMonitor() as mon:
         t0 = time.monotonic()
@@ -192,7 +192,7 @@ def analyze(src: str, opts: Options, work: Path, log=print) -> Analysis:
         )
         for p in sel.picks
     ]
-    return Analysis(src, duration, size, tr, sel, specs, stages, gfn, mon.summary(), opts)
+    return Analysis(src, duration, size, tr, sel, specs, stages, reserved, mon.summary(), opts)
 
 
 def export_clips(
@@ -206,7 +206,7 @@ def export_clips(
     duration = duration or float(info["format"]["duration"])
     out_dir = _private_dir(out_dir)
     work = _private_dir(out_dir / "work")
-    gpu_ok = not geforce_now_running()
+    gpu_ok = not gpu_reserved_running()
     encoders = ("h264_nvenc", "libx264") if gpu_ok else ("libx264",)
     out_w, out_h = out_size(opts.aspect, opts.long_side)
     style = CaptionStyle(upper=opts.upper)
@@ -283,7 +283,7 @@ def make(src: str, opts: Options, log=print) -> dict:
         "transcription": {"engine": tr.engine, "note": tr.note, "language": tr.language, "words": len(tr.words)},
         "selection": {"engine": sel.engine, "note": sel.note,
                       "llm_model": DEFAULT_MODEL if opts.use_llm else None},
-        "geforce_now_gate": an.geforce_now_gate,
+        "gpu_reserved_gate": an.gpu_reserved_gate,
         "clips": clips,
         "runtime": {**stages, "total_s": round(time.monotonic() - t_start, 2)},
         "gpu": an.gpu,
