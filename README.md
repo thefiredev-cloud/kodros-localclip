@@ -33,7 +33,7 @@ git clone https://github.com/thefiredev-cloud/kodros-localclip.git
 cd kodros-localclip
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e '.[gpu,test]'          # drop ,gpu on a machine without CUDA
-python -m pytest -q                   # 57 tests, no models or services needed
+python -m pytest -q                   # full suite, no models or services needed
 localclip make talk.mp4 --count 3 --aspect 9:16
 localclip serve                       # web editor on http://127.0.0.1:8871
 ```
