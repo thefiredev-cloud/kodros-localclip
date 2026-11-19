@@ -1,0 +1,91 @@
+:root {
+  --bg: #111315; --panel: #1a1d20; --line: #2c3136; --text: #e6e8ea; --dim: #8d969e;
+  --accent: #3fb8a8; --accent-ink: #06201c; --warn: #e0a64a; --bad: #e0675a;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px; color: var(--text); background: var(--bg);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+header { display: flex; align-items: baseline; gap: 14px; padding: 12px 18px; border-bottom: 1px solid var(--line); }
+header h1 { font-size: 18px; margin: 0; }
+[hidden] { display: none !important; }
+header .sub { color: var(--dim); }
+#status { margin-left: auto; color: var(--warn); min-height: 1em; }
+#status.err { color: var(--bad); }
+main { display: grid; grid-template-columns: 290px 1fr; min-height: calc(100vh - 50px); }
+aside { border-right: 1px solid var(--line); padding: 14px; overflow: auto; }
+h2 { font-size: 15px; margin: 18px 0 8px; }
+h2 small, h3 small { color: var(--dim); font-weight: 400; margin-left: 6px; }
+h3 { font-size: 13px; color: var(--dim); margin: 14px 0 6px; font-weight: 600; }
+aside section + section { margin-top: 18px; }
+.btn { display: inline-block; background: var(--panel); color: var(--text); border: 1px solid var(--line);
+  border-radius: 6px; padding: 6px 12px; cursor: pointer; font: inherit; }
+.btn:hover { border-color: var(--accent); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.btn.small { padding: 3px 8px; font-size: 12px; }
+.drop { margin-top: 8px; border: 1px dashed var(--line); border-radius: 6px; padding: 14px; text-align: center; color: var(--dim); }
+.drop.over { border-color: var(--accent); color: var(--text); }
+progress { width: 100%; margin-top: 8px; }
+input, select { background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 5px;
+  padding: 4px 6px; font: inherit; max-width: 100%; }
+input[type=number] { width: 78px; }
+input[type=range] { padding: 0; width: 130px; }
+label { display: block; color: var(--dim); }
+label input, label select { display: block; margin-top: 3px; color: var(--text); }
+label.check { display: flex; gap: 6px; align-items: center; margin-top: 8px; }
+label.check input { display: inline; margin: 0; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.plist { list-style: none; margin: 0; padding: 0; }
+.plist li { padding: 7px 8px; border-radius: 6px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
+.plist li:hover { background: var(--panel); }
+.plist li.on { background: var(--panel); outline: 1px solid var(--accent); }
+.plist .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plist .st { color: var(--dim); font-size: 12px; white-space: nowrap; }
+#stage { padding: 14px 18px; min-width: 0; }
+.empty { color: var(--dim); padding: 40px 0; }
+.busy pre, .log { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px;
+  max-height: 260px; overflow: auto; white-space: pre-wrap; font: 12px ui-monospace, monospace; color: var(--dim); }
+.top { display: grid; grid-template-columns: minmax(280px, 380px) 1fr; gap: 18px; align-items: start; }
+.vwrap { position: relative; background: #000; border-radius: 6px; overflow: hidden; }
+.vwrap video { display: block; width: 100%; height: auto; max-height: 62vh; }
+#guide { position: absolute; top: 0; bottom: 0; border: 2px solid var(--accent); background: rgba(63, 184, 168, .12); pointer-events: none; }
+.timeline { position: relative; height: 22px; margin-top: 8px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 4px; cursor: pointer; }
+.timeline .seg { position: absolute; top: 2px; bottom: 2px; background: var(--accent); opacity: .45; border-radius: 3px; }
+.timeline .seg.off { background: var(--dim); opacity: .25; }
+.timeline .seg.active { opacity: .95; }
+.timeline .head { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; }
+.transport { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; color: var(--dim); }
+.transport b { color: var(--text); font-variant-numeric: tabular-nums; }
+.panel { min-width: 0; }
+.cands { list-style: none; padding: 0; margin: 0; max-height: 150px; overflow: auto; }
+.cands li { display: flex; gap: 8px; align-items: baseline; padding: 4px 0; border-bottom: 1px solid var(--line); }
+.cands .t { color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.cands .tx { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.words { max-height: 210px; overflow: auto; line-height: 1.7; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 6px; padding: 8px 10px; }
+.words span { cursor: pointer; border-radius: 3px; padding: 0 1px; }
+.words span:hover { background: #2a3238; }
+.words span.in { background: rgba(63, 184, 168, .25); }
+.words span.cur { background: var(--accent); color: var(--accent-ink); }
+.clips { display: grid; gap: 10px; }
+.clip { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+.clip.active { border-color: var(--accent); }
+.clip .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+.clip .row + .row { margin-top: 8px; }
+.clip .title { flex: 1; min-width: 200px; }
+.clip .title input { width: 100%; }
+.clip .meta { color: var(--dim); font-size: 12px; }
+.clip .dur { font-variant-numeric: tabular-nums; color: var(--text); }
+.clip .bad { color: var(--bad); }
+.exportbar { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; margin-top: 14px; padding: 10px 0; border-top: 1px solid var(--line); }
+#xnote { color: var(--dim); }
+.export { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+.export h3 { margin: 0 0 8px; }
+.export .vids { display: flex; flex-wrap: wrap; gap: 12px; }
+.export figure { margin: 0; width: 180px; }
+.export video { width: 180px; border-radius: 4px; background: #000; }
+.export figcaption { font-size: 12px; color: var(--dim); }
+.export img.sheet { max-width: 100%; margin-top: 8px; border-radius: 4px; }
+a { color: var(--accent); }

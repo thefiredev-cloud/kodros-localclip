@@ -1,0 +1,30 @@
+[project]
+name = "localclip"
+version = "0.2.0"
+description = "Local auto short-clip maker: transcribe, pick moments, smart-crop, burn word captions, loudness-normalize."
+requires-python = ">=3.11"
+dependencies = [
+  "faster-whisper>=1.1",
+  "opencv-python-headless>=4.9,<5",  # OpenCV 5 dropped CascadeClassifier from the main module
+  "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+gpu = ["nvidia-cublas-cu12", "nvidia-cudnn-cu12>=9,<10"]
+test = ["pytest>=8"]
+
+[project.scripts]
+localclip = "localclip.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["localclip*"]
+
+[tool.setuptools.package-data]
+localclip = ["web/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

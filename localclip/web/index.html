@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LocalClip</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>LocalClip</h1>
+  <span class="sub">long video to captioned vertical clips, on this machine</span>
+  <span id="status" role="status" aria-live="polite"></span>
+</header>
+<main>
+  <aside id="side">
+    <section>
+      <h2>New project</h2>
+      <label class="btn primary" id="pick">Upload a video
+        <input id="file" type="file" accept="video/*,.mkv,.mov,.mp4,.webm,.m4v" hidden>
+      </label>
+      <div id="drop" class="drop">or drop a file here</div>
+      <progress id="uprog" max="100" value="0" hidden></progress>
+      <h3>Auto-pick</h3>
+      <div class="grid2">
+        <label>Clips <input id="o-count" type="number" min="1" max="20" value="3"></label>
+        <label>Transcriber
+          <select id="o-engine"><option value="auto">auto</option><option value="whisper">whisper</option><option value="parakeet">parakeet</option></select>
+        </label>
+        <label>Min sec <input id="o-min" type="number" min="5" max="170" value="20"></label>
+        <label>Max sec <input id="o-max" type="number" min="10" max="180" value="60"></label>
+      </div>
+      <label class="check"><input id="o-llm" type="checkbox" checked> Use local LLM to pick (falls back to scoring)</label>
+      <label class="check"><input id="o-faces" type="checkbox" checked> Follow faces when reframing</label>
+    </section>
+    <section>
+      <h2>Projects</h2>
+      <ul id="projects" class="plist"></ul>
+    </section>
+  </aside>
+  <section id="stage">
+    <div id="empty" class="empty">Upload a video or pick a project.</div>
+    <div id="busy" class="busy" hidden>
+      <h2 id="busy-title">Working</h2>
+      <pre id="busy-log"></pre>
+    </div>
+    <div id="editor" hidden>
+      <div class="top">
+        <div class="player">
+          <div class="vwrap"><video id="vid" controls preload="metadata"></video><div id="guide" hidden></div></div>
+          <div id="timeline" class="timeline" title="click to seek"></div>
+          <div class="transport">
+            <span>Playhead <b id="now">0:00.0</b></span>
+            <button id="b-add" class="btn">Add clip at playhead</button>
+            <button id="b-start" class="btn">Set start here</button>
+            <button id="b-end" class="btn">Set end here</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Other strong moments</h3>
+          <ul id="cands" class="cands"></ul>
+          <h3>Transcript <small>click a word: start of the active clip. shift+click: end.</small></h3>
+          <div id="words" class="words"></div>
+        </div>
+      </div>
+      <h2>Clips <small id="picknote"></small></h2>
+      <div id="clips" class="clips"></div>
+      <div class="exportbar">
+        <label>Shape
+          <select id="x-aspect"><option>9:16</option><option>1:1</option><option>4:5</option><option>16:9</option></select>
+        </label>
+        <label class="check"><input id="x-upper" type="checkbox" checked> UPPERCASE captions</label>
+        <button id="b-export" class="btn primary">Export selected</button>
+        <span id="xnote"></span>
+      </div>
+      <pre id="export-log" class="log" hidden></pre>
+      <h2>Exports</h2>
+      <div id="exports"></div>
+    </div>
+  </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+Why do most people pay for software they could run at home? I asked myself that question last month, and the answer surprised me. I was paying for nine different subscriptions, and seven of them did work my own computer could already do. The graphics card in my desk sits idle most of the day. That is wasted money and wasted hardware.
+
+So, um, anyway, I started, uh, looking around at things. And there was a lot of stuff. Like, a lot. And some of it was fine I guess, and some of it was, you know, not really what I wanted, so I kept going, and then I kept going some more.
+
+Here is the biggest mistake people make with AI tools. They treat every tool as a separate monthly bill. But most of these tools are the same three pieces underneath. Speech to text. A language model. And a video encoder. Once you own those three pieces, you can build almost any of these products yourself, and you only pay for electricity.
+
+Let me give you a concrete example. Clip tools charge sixty dollars a month to cut long videos into short ones. What do they actually do? They transcribe the audio, they ask a model which moments are interesting, they crop the frame around the speaker, and they burn captions on top. Every one of those steps runs on a home computer in under a minute.
+
+And then there is the stuff about settings, which, honestly, I changed a few times, and then changed back, and then I think I changed it again, and it was mostly the same either way.
+
+The real lesson is about ownership. When you rent a tool, the company decides what it does, what it costs next year, and what happens to your data. When you own the tool, your videos never leave your house. Nobody trains on your footage. Nobody raises the price on you. That matters more every year.
+
+What should you build first? Start with whatever you pay for most often. Write down every subscription you have. Next to each one, write the one job it does for you. You will find that half the list is the same job wearing a different logo. Build that job once, and cancel the rest.
+
+My last tip is simple. Measure everything. Time how long the local version takes, check the quality side by side, and only switch when the home version wins. If it loses, keep paying, and try again in six months. Hardware gets faster every year, and the gap closes quickly.

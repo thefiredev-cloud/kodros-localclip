@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Run LocalClip from its project venv (editable install of this checkout).
+# To put it on PATH, symlink this file into ~/.local/bin (see README "Run").
+set -euo pipefail
+
+venv_bin="$HOME/.venvs/localclip/bin/localclip"
+if [ ! -x "$venv_bin" ]; then
+  echo "localclip: venv missing at ~/.venvs/localclip; see README Install" >&2
+  exit 1
+fi
+exec "$venv_bin" "$@"
